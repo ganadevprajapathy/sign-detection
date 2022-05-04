@@ -53,8 +53,6 @@ for each in folder:
               # pre_processed_point_history_list = pre_process_point_history(
               #     debug_image, point_history)
               # # Write to the dataset file
-              # logging_csv(number, mode, pre_processed_landmark_list,
-              #             pre_processed_point_history_list)
 
           csv_path = 'model/keypoint_classifier/keypoint.csv'
           with open(csv_path, 'a', newline="") as f:
