@@ -10,11 +10,12 @@ import copy
 
 from os import listdir
 from os.path import isfile, join
-path = '/home/ganadev/Documents/SignDetection/sign-detection/training/'
+path = '/home/ganadev/Documents/sign-detection/training2/'
 folder = [d for d in listdir(path)]
 count = 0
 for each in folder:
   IMAGE_FILES = [path + each + '/' + f for f in listdir(path + '/' + each) if isfile(join(path + '/' + each, f))]
+#   IMAGE_FILES = [path + each + '/' + f for f in listdir(path + '/' + each) if (isfile(join(path + '/' + each, f) and f.endswith('.jpg')))]
   print('Folder: ' + each)
   
   with mp_hands.Hands(
@@ -22,13 +23,14 @@ for each in folder:
       max_num_hands=2,
       min_detection_confidence=0.5) as hands:
     for idx, file in enumerate(IMAGE_FILES):
-
+      if not file.endswith('.jpg'):
+        continue
       print('file: ' + file)
       # Read image #####################################################
       
       # Read an image, flip it around y-axis for correct handedness output 
       image = cv2.flip(cv2.imread(file), 1) # Mirror display
-      cv2.imshow('image ', cv2.flip(image, 1))
+      # cv2.imshow('image ', cv2.flip(image, 1))
       debug_image = copy.deepcopy(image)
 
       # Detection implementation #############################################################
